@@ -39,7 +39,6 @@ class CarpenterController extends Controller
     public function destroy(Carpenter $carpenter){
         if($carpenter->img != null){
             Storage::disk('s3')->delete($carpenter->cloudinary_public_id);
-            // Cloudder::destroyImage($carpenter->cloudinary_public_id);
         }
         $carpenter->delete();
         return redirect('/carpenters');
@@ -57,16 +56,12 @@ class CarpenterController extends Controller
 
     private function postImage(CarpenterRequest $request,Carpenter $carpenter) :void
     {
+        if($carpenter->cloudinary_public_id != null){
+            Storage::disk('s3')->delete($carpenter->cloudinary_public_id);
+        }
         $image = $request->file('img');
         $path = Storage::disk('s3')->putFile('/', $image, 'public');
         $carpenter->img = Storage::disk('s3')->url($path);
         $carpenter->cloudinary_public_id = $path;
-                // Cloudder::upload($image_path, null);
-        // $publicId = Cloudder::getPublicId();
-        // $logoUrl = Cloudder::secureShow($publicId, [
-        //     'width'     => 500,
-        //     'height'    => 500
-        // ]);
-        // $logoUrl = Cloudder::secureShow($publicId);
     }
 }
