@@ -107,6 +107,9 @@ class MessageController extends Controller
         $message->status = 0;
         $message->save();
         $lastmessage = Message::latest()->first();
+        $lastmessage->carpenters()->each(function ($carpenter){
+            $carpenter->delete();
+        });
         $lastmessage->carpenters()->attach($request->carpenters);
         $lastmessage->save();
     }
