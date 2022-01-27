@@ -217,6 +217,10 @@ textarea{
     padding:0 10px;
     background-color: ghostwhite;
 }
+.carpenter-item:first-child .carpenter-item-deletebtn{
+    display: none;
+}
+
 .carpenter-item-deletebtn:hover{
     cursor: pointer;
     opacity: 0.6;

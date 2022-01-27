@@ -11,7 +11,6 @@ window.addEventListener('load', (event) => {
     // 大工追加の処理
     document.getElementById('add-carpenter').addEventListener("click",()=>{
         let carpenterItem = document.getElementsByClassName("carpenter-item")
-        console.log(carpenterItem[0])
         let cloneElement = carpenterItem[0].cloneNode(true)
         document.querySelector("#carpenter-list .carpenter-item:last-child").after(cloneElement)
     })
